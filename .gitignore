@@ -1,0 +1,5 @@
+/commonModule/build/
+/commonModule/.gradle/
+/commonModule/.kotlin/
+/commonModule/.run/
+/.idea/
