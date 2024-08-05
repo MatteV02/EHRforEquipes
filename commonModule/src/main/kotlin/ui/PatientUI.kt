@@ -22,7 +22,7 @@ import java.time.ZoneId
 import java.util.*
 
 @Composable
-fun patientEditView(patient: Patient, locale: Locale, modifier: Modifier = Modifier) {
+fun patientEditView(patient: Patient, locale: Locale, enabled: Boolean = true, modifier: Modifier = Modifier) {
 
     val labels = ResourceBundle.getBundle("patientEditView", locale)
 
@@ -33,30 +33,30 @@ fun patientEditView(patient: Patient, locale: Locale, modifier: Modifier = Modif
         Row(modifier
             .padding(bottom = 5.dp)
         ) {
-            nameTextField(patient, label = labels.getString("nameTextField"), modifier.weight(1.0f))
-            genderPicker(patient, labels.getString("genderPickerMale"), labels.getString("genderPickerFemale"), modifier.padding(horizontal = 5.dp))
+            nameTextField(patient, label = labels.getString("nameTextField"), enabled, modifier.weight(1.0f))
+            genderPicker(patient, labels.getString("genderPickerMale"), labels.getString("genderPickerFemale"), enabled, modifier.padding(horizontal = 5.dp))
         }
         Row(modifier
             .padding(bottom = 5.dp)
         ) {
-            dateOfBirthPicker(patient, modifier.align(Alignment.CenterVertically))
-            placeOfBirthTextField(patient, labels.getString("placeOfBirthTextField"), modifier.weight(1.0f))
+            dateOfBirthPicker(patient, enabled, modifier.align(Alignment.CenterVertically))
+            placeOfBirthTextField(patient, labels.getString("placeOfBirthTextField"), enabled, modifier.weight(1.0f))
         }
         Row(modifier
             .padding(bottom = 5.dp)
         ) {
-            residenceTextField(patient, labels.getString("residenceTextField"), modifier.weight(1.0f).padding(end = 5.dp))
-            FCTextField(patient, labels.getString("FCTextField"), modifier.weight(1.0f))
+            residenceTextField(patient, labels.getString("residenceTextField"), enabled, modifier.weight(1.0f).padding(end = 5.dp))
+            FCTextField(patient, labels.getString("FCTextField"), enabled, modifier.weight(1.0f))
         }
         Row(modifier
             .padding(bottom = 5.dp)
         ) {
-            phoneNumberTextField(patient, labels.getString("phoneNumberTextField"), modifier.weight(1.0f).padding(end = 5.dp))
-            landlinePhoneNumberTextField(patient, labels.getString("landlinePhoneNumberTextField"), modifier.weight(1.0f))
+            phoneNumberTextField(patient, labels.getString("phoneNumberTextField"), enabled, modifier.weight(1.0f).padding(end = 5.dp))
+            landlinePhoneNumberTextField(patient, labels.getString("landlinePhoneNumberTextField"), enabled, modifier.weight(1.0f))
         }
         Row(modifier) {
-            mailTextField(patient, labels.getString("mailTextField"), modifier.weight(1.0f).padding(end = 5.dp))
-            doctorTextField(patient, labels.getString("doctorTextField"), modifier.weight(1.0f))
+            mailTextField(patient, labels.getString("mailTextField"), enabled, modifier.weight(1.0f).padding(end = 5.dp))
+            doctorTextField(patient, labels.getString("doctorTextField"), enabled, modifier.weight(1.0f))
         }
     }
 }
@@ -81,7 +81,7 @@ fun patientEditViewPreview() {
 
 
 @Composable
-fun nameTextField(patient: Patient, label : String, modifier: Modifier = Modifier) {
+fun nameTextField(patient: Patient, label : String, enabled: Boolean = true, modifier: Modifier = Modifier) {
     var name by mutableStateOf(patient.name)
     TextField(
         value = name,
@@ -93,6 +93,7 @@ fun nameTextField(patient: Patient, label : String, modifier: Modifier = Modifie
         label = {
             Text(label)
         },
+        enabled = enabled,
         modifier = modifier
     )
 }
@@ -107,7 +108,7 @@ fun nameTextFieldPreview() {
 
 
 @Composable
-fun genderPicker(patient: Patient, maleLabel : String, femaleLabel : String, modifier: Modifier = Modifier) {
+fun genderPicker(patient: Patient, maleLabel : String, femaleLabel : String, enabled: Boolean = true, modifier: Modifier = Modifier) {
     var isMale by mutableStateOf(patient.gender == MALE)
     Row(modifier) {
         Row(modifier.padding(end = 5.dp)) {
@@ -117,7 +118,8 @@ fun genderPicker(patient: Patient, maleLabel : String, femaleLabel : String, mod
                     isMale = true
                     patient.gender = MALE
                     DBEntityManager.update(patient)
-                }
+                },
+                enabled = enabled
             )
             Text(maleLabel, modifier.align(Alignment.CenterVertically))
         }
@@ -128,7 +130,8 @@ fun genderPicker(patient: Patient, maleLabel : String, femaleLabel : String, mod
                     isMale = false
                     patient.gender = FEMALE
                     DBEntityManager.update(patient)
-                }
+                },
+                enabled = enabled
             )
             Text(femaleLabel, modifier.align(Alignment.CenterVertically))
         }
@@ -149,7 +152,7 @@ fun genderPickerPreview() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun dateOfBirthPicker(patient: Patient, modifier: Modifier = Modifier) {
+fun dateOfBirthPicker(patient: Patient, enabled: Boolean = true, modifier: Modifier = Modifier) {
     var dateOfBirth by mutableStateOf(patient.dateOfBirth)
     var openDialog by remember { mutableStateOf(false) }
     val datePickerState = rememberDatePickerState(initialDisplayMode = DisplayMode.Input)
@@ -158,6 +161,7 @@ fun dateOfBirthPicker(patient: Patient, modifier: Modifier = Modifier) {
         onClick = {
             openDialog = true
         },
+        enabled = enabled,
         modifier = modifier
             .padding(horizontal = 10.dp)
     ) {
@@ -198,7 +202,7 @@ fun dateOfBirthPickerPreview() {
 
 
 @Composable
-fun placeOfBirthTextField(patient: Patient, label: String, modifier: Modifier = Modifier) {
+fun placeOfBirthTextField(patient: Patient, label: String, enabled: Boolean = true, modifier: Modifier = Modifier) {
     var placeOfBirth by mutableStateOf(patient.placeOfBirth)
 
     TextField(
@@ -211,6 +215,7 @@ fun placeOfBirthTextField(patient: Patient, label: String, modifier: Modifier = 
         label = {
             Text(label)
         },
+        enabled = enabled,
         modifier = modifier
     )
 }
@@ -225,7 +230,7 @@ fun placeOfBirthTextFieldPreview() {
 
 
 @Composable
-fun residenceTextField(patient: Patient, label: String, modifier: Modifier = Modifier) {
+fun residenceTextField(patient: Patient, label: String, enabled: Boolean = true, modifier: Modifier = Modifier) {
     var residence by mutableStateOf(patient.residence)
 
     TextField(
@@ -238,6 +243,7 @@ fun residenceTextField(patient: Patient, label: String, modifier: Modifier = Mod
         label = {
             Text(label)
         },
+        enabled = enabled,
         modifier = modifier
     )
 }
@@ -252,7 +258,7 @@ fun residenceTextFieldPreview() {
 
 
 @Composable
-fun FCTextField(patient: Patient, label: String, modifier: Modifier = Modifier) {
+fun FCTextField(patient: Patient, label: String, enabled: Boolean = true, modifier: Modifier = Modifier) {
     var FC by mutableStateOf(patient.FC)
 
     TextField(
@@ -265,6 +271,7 @@ fun FCTextField(patient: Patient, label: String, modifier: Modifier = Modifier) 
         label = {
             Text(label)
         },
+        enabled = enabled,
         modifier = modifier
     )
 }
@@ -279,7 +286,7 @@ fun FCTextFieldPreview() {
 
 
 @Composable
-fun phoneNumberTextField(patient: Patient, label: String, modifier: Modifier = Modifier) {
+fun phoneNumberTextField(patient: Patient, label: String, enabled: Boolean = true, modifier: Modifier = Modifier) {
     var phoneNumber by mutableStateOf(patient.phoneNumber)
 
     TextField(
@@ -292,6 +299,7 @@ fun phoneNumberTextField(patient: Patient, label: String, modifier: Modifier = M
         label = {
             Text(label)
         },
+        enabled = enabled,
         modifier = modifier
     )
 }
@@ -306,7 +314,7 @@ fun phoneNumberTextFieldPreview() {
 
 
 @Composable
-fun landlinePhoneNumberTextField(patient: Patient, label: String, modifier: Modifier = Modifier) {
+fun landlinePhoneNumberTextField(patient: Patient, label: String, enabled: Boolean = true, modifier: Modifier = Modifier) {
     var landlinePhoneNumber by mutableStateOf(patient.landlinePhoneNumber)
 
     TextField(
@@ -319,6 +327,7 @@ fun landlinePhoneNumberTextField(patient: Patient, label: String, modifier: Modi
         label = {
             Text(label)
         },
+        enabled = enabled,
         modifier = modifier
     )
 }
@@ -333,7 +342,7 @@ fun landlinePhoneNumberTextFieldPreview() {
 
 
 @Composable
-fun mailTextField(patient: Patient, label: String, modifier: Modifier = Modifier) {
+fun mailTextField(patient: Patient, label: String, enabled: Boolean = true, modifier: Modifier = Modifier) {
     var mail by mutableStateOf(patient.mail)
 
     TextField(
@@ -346,6 +355,7 @@ fun mailTextField(patient: Patient, label: String, modifier: Modifier = Modifier
         label = {
             Text(label)
         },
+        enabled = enabled,
         modifier = modifier
     )
 }
@@ -360,7 +370,7 @@ fun mailTextFieldPreview() {
 
 
 @Composable
-fun doctorTextField(patient: Patient, label: String, modifier: Modifier = Modifier) {
+fun doctorTextField(patient: Patient, label: String, enabled: Boolean = true, modifier: Modifier = Modifier) {
     var doctor by mutableStateOf(patient.doctor)
 
     TextField(
@@ -373,6 +383,7 @@ fun doctorTextField(patient: Patient, label: String, modifier: Modifier = Modifi
         label = {
             Text(label)
         },
+        enabled = enabled,
         modifier = modifier
     )
 }

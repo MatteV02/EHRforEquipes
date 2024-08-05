@@ -76,9 +76,16 @@ class Visit(
 
             override fun toString(): String {
                 return when (this) {
-                    NORMAL_VISIT -> "Normal visit"
-                    CHECKUP_VISIT -> "Check-up visit"
+                    NORMAL_VISIT -> "normal_visit"
+                    CHECKUP_VISIT -> "checkup_visit"
                 }
+            }
+
+            companion object {
+                fun getTypes() : List<VisitType> = listOf(
+                    NORMAL_VISIT,
+                    CHECKUP_VISIT
+                )
             }
 
         }
