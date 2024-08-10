@@ -21,7 +21,6 @@ class Patient(
     var landlinePhoneNumber: String = "",
     var mail: String = "",
     var doctor: String = "",
-    //@OneToMany val visits: MutableList<Visit> = mutableListOf()
 ) {
 
     @Id @GeneratedValue

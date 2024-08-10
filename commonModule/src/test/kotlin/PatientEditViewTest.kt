@@ -1,4 +1,6 @@
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import dbManagement.DBEntityManager
@@ -11,11 +13,10 @@ import org.hibernate.cfg.AvailableSettings
 import org.hibernate.cfg.Configuration
 import org.hibernate.cfg.JdbcSettings.*
 import org.hibernate.tool.schema.Action
-import ui.visitEditView
+import ui.patientEditView
 import java.time.LocalDate
-import java.util.Locale.ENGLISH
 
-class VisitUITest : FunSpec({
+class PatientEditViewTest : FunSpec({
     fun mainWindow() = application {
         val p = Patient(
             name = "Veroni Matteo",
@@ -31,23 +32,17 @@ class VisitUITest : FunSpec({
         )
         DBEntityManager.insert(p)
 
-        val pl = Place(
-            name = "FKT", city = "Carpi"
-        )
-        DBEntityManager.insert(pl)
-
-        val visit = Visit()
-        DBEntityManager.insert(visit)
-
         Window(onCloseRequest = ::exitApplication) {
             MaterialTheme {
-                val locale = ENGLISH
-                visitEditView(visit, locale)
+                patientEditView(
+                    patient = p,
+                    modifier = Modifier.fillMaxWidth()
+                )
             }
         }
     }
 
-    test("VisitUITest") {
+    test("PatientEditViewTest") {
         val sessionFactory = Configuration()
             .addAnnotatedClass(Patient::class.java)
             .addAnnotatedClass(Place::class.java)

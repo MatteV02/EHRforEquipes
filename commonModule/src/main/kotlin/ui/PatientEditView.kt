@@ -3,7 +3,6 @@ package ui
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CalendarMonth
@@ -21,42 +20,42 @@ import java.time.LocalDate
 import java.time.ZoneId
 import java.util.*
 
-@Composable
-fun patientEditView(patient: Patient, locale: Locale, enabled: Boolean = true, modifier: Modifier = Modifier) {
 
-    val labels = ResourceBundle.getBundle("patientEditView", locale)
+private val bundle = ResourceBundle.getBundle("patientEditView", Locale.getDefault())
+
+@Composable
+fun patientEditView(patient: Patient, enabled: Boolean = true, modifier: Modifier = Modifier) {
 
     Column(modifier
-        .fillMaxWidth()
         .padding(10.dp)
     ) {
         Row(modifier
             .padding(bottom = 5.dp)
         ) {
-            nameTextField(patient, label = labels.getString("nameTextField"), enabled, modifier.weight(1.0f))
-            genderPicker(patient, labels.getString("genderPickerMale"), labels.getString("genderPickerFemale"), enabled, modifier.padding(horizontal = 5.dp))
+            nameTextField(patient, label = bundle.getString("nameTextField"), enabled, modifier.weight(1.0f))
+            genderPicker(patient, bundle.getString("genderPickerMale"), bundle.getString("genderPickerFemale"), enabled, modifier.padding(horizontal = 5.dp))
         }
         Row(modifier
             .padding(bottom = 5.dp)
         ) {
             dateOfBirthPicker(patient, enabled, modifier.align(Alignment.CenterVertically))
-            placeOfBirthTextField(patient, labels.getString("placeOfBirthTextField"), enabled, modifier.weight(1.0f))
+            placeOfBirthTextField(patient, bundle.getString("placeOfBirthTextField"), enabled, modifier.weight(1.0f))
         }
         Row(modifier
             .padding(bottom = 5.dp)
         ) {
-            residenceTextField(patient, labels.getString("residenceTextField"), enabled, modifier.weight(1.0f).padding(end = 5.dp))
-            FCTextField(patient, labels.getString("FCTextField"), enabled, modifier.weight(1.0f))
+            residenceTextField(patient, bundle.getString("residenceTextField"), enabled, modifier.weight(1.0f).padding(end = 5.dp))
+            FCTextField(patient, bundle.getString("FCTextField"), enabled, modifier.weight(1.0f))
         }
         Row(modifier
             .padding(bottom = 5.dp)
         ) {
-            phoneNumberTextField(patient, labels.getString("phoneNumberTextField"), enabled, modifier.weight(1.0f).padding(end = 5.dp))
-            landlinePhoneNumberTextField(patient, labels.getString("landlinePhoneNumberTextField"), enabled, modifier.weight(1.0f))
+            phoneNumberTextField(patient, bundle.getString("phoneNumberTextField"), enabled, modifier.weight(1.0f).padding(end = 5.dp))
+            landlinePhoneNumberTextField(patient, bundle.getString("landlinePhoneNumberTextField"), enabled, modifier.weight(1.0f))
         }
         Row(modifier) {
-            mailTextField(patient, labels.getString("mailTextField"), enabled, modifier.weight(1.0f).padding(end = 5.dp))
-            doctorTextField(patient, labels.getString("doctorTextField"), enabled, modifier.weight(1.0f))
+            mailTextField(patient, bundle.getString("mailTextField"), enabled, modifier.weight(1.0f).padding(end = 5.dp))
+            doctorTextField(patient, bundle.getString("doctorTextField"), enabled, modifier.weight(1.0f))
         }
     }
 }
@@ -75,7 +74,7 @@ fun patientEditViewPreview() {
             landlinePhoneNumber = "",
             mail = "matteo.veroni@mail.com",
             doctor = "Elisa Lombardi"
-        ), locale = Locale.ENGLISH
+        )
     )
 }
 
