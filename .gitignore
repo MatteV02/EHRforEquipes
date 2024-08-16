@@ -2,4 +2,8 @@
 /commonModule/.gradle/
 /commonModule/.kotlin/
 /commonModule/.run/
+/mainModule/build/
+/mainModule/.gradle/
+/mainModule/.kotlin/
+/mainModule/.run/
 /.idea/
