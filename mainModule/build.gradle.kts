@@ -15,6 +15,10 @@ repositories {
     google()
 }
 
+tasks.withType<Test>().configureEach {
+    useJUnitPlatform()
+}
+
 dependencies {
     // Note, if you develop a library, you should use compose.desktop.common.
     // compose.desktop.currentOs should be used in launcher-sourceSet
@@ -22,6 +26,12 @@ dependencies {
     // With compose.desktop.common you will also lose @Preview functionality
     implementation(compose.desktop.currentOs)
     implementation(compose.material3)
+    implementation(compose.materialIconsExtended)
+
+    implementation(files("libs/commonModule-1.0-SNAPSHOT-all.jar"))
+
+    // https://mvnrepository.com/artifact/io.kotest/kotest-runner-junit5-jvm
+    testImplementation("io.kotest:kotest-runner-junit5-jvm:5.9.1")
 }
 
 compose.desktop {

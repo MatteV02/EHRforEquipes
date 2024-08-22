@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.compose")
     id("org.jetbrains.kotlin.plugin.compose")
     kotlin("kapt") version "2.0.0"
+    id("com.gradleup.shadow") version "8.3.0"
 }
 
 group = "com.MatteV02"
@@ -24,14 +25,15 @@ dependencies {
     // (in a separate module for demo project and in testMain).
     // With compose.desktop.common you will also lose @Preview functionality
     implementation(compose.desktop.currentOs)
-    implementation(compose.material3)
-    implementation(compose.materialIconsExtended)
+
     //implementation("androidx.compose.material:material-icons-extended")
     implementation("org.hibernate:hibernate-core:6.5.2.Final")
     implementation("org.hibernate:hibernate-validator:8.0.1.Final")
     implementation("org.glassfish:jakarta.el:4.0.2")
-    implementation("org.hibernate:hibernate-agroal:6.5.2.Final")
-    implementation("io.agroal:agroal-pool:2.5")
+    // https://mvnrepository.com/artifact/org.hibernate.orm/hibernate-hikaricp
+    implementation("org.hibernate.orm:hibernate-hikaricp:6.5.2.Final")
+    // https://mvnrepository.com/artifact/com.zaxxer/HikariCP
+    implementation("com.zaxxer:HikariCP:5.1.0")
     implementation("org.hibernate:hibernate-jpamodelgen:6.5.2.Final")
     kapt("org.hibernate:hibernate-jpamodelgen:6.5.2.Final")
     implementation("com.h2database:h2:2.3.230")
@@ -39,6 +41,7 @@ dependencies {
     // https://mvnrepository.com/artifact/io.kotest/kotest-runner-junit5-jvm
     testImplementation("io.kotest:kotest-runner-junit5-jvm:5.9.1")
 }
+
 
 //compose.desktop {
 //    application {

@@ -2,8 +2,12 @@
 /commonModule/.gradle/
 /commonModule/.kotlin/
 /commonModule/.run/
+/commonModule/db.mv.db
+/commonModule/dbSQL.mv.db
 /mainModule/build/
 /mainModule/.gradle/
 /mainModule/.kotlin/
 /mainModule/.run/
+/mainModule/db.mv.db
+db.mv.db
 /.idea/
