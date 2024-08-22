@@ -28,7 +28,7 @@ dependencies {
     implementation(compose.material3)
     implementation(compose.materialIconsExtended)
 
-    implementation(files("libs/commonModule-1.0-SNAPSHOT-all.jar"))
+    implementation(project(":commonModule"))
 
     // https://mvnrepository.com/artifact/io.kotest/kotest-runner-junit5-jvm
     testImplementation("io.kotest:kotest-runner-junit5-jvm:5.9.1")

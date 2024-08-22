@@ -14,3 +14,7 @@ pluginManagement {
 }
 
 rootProject.name = "mainModule"
+
+include(":commonModule")
+
+project(":commonModule").projectDir = File("../commonModule")
