@@ -12,10 +12,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.window.DialogWindow
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
-import dbManagement.DBEntityManager.ConnectionTypes
-import dbManagement.HibernateDBEntityManager
-import entities.patient.Patient
-import entities.visit.Visit
+import com.MatteV02.EHRforEquipes.commonModule.dbManagement.DBEntityManager.ConnectionTypes
+import com.MatteV02.EHRforEquipes.commonModule.dbManagement.HibernateDBEntityManager
+import com.MatteV02.EHRforEquipes.commonModule.entities.patient.Patient
+import com.MatteV02.EHRforEquipes.commonModule.entities.visit.Visit
+import com.MatteV02.EHRforEquipes.mainModule.patientplugin.PatientPlugin
 import io.kotest.core.spec.style.FunSpec
 import java.time.LocalDate
 

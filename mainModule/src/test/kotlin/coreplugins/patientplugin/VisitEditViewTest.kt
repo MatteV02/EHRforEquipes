@@ -4,12 +4,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
-import dbManagement.DBEntityManager.ConnectionTypes
-import dbManagement.HibernateDBEntityManager
-import entities.patient.Patient
-import entities.patient.Patient.Companion.Gender.MALE
-import entities.place.Place
-import entities.visit.Visit
+import com.MatteV02.EHRforEquipes.commonModule.dbManagement.DBEntityManager.*
+import com.MatteV02.EHRforEquipes.commonModule.dbManagement.HibernateDBEntityManager
+import com.MatteV02.EHRforEquipes.commonModule.entities.patient.Patient
+import com.MatteV02.EHRforEquipes.commonModule.entities.place.Place
+import com.MatteV02.EHRforEquipes.commonModule.entities.visit.Visit
+import com.MatteV02.EHRforEquipes.mainModule.patientplugin.PatientPlugin
+import com.MatteV02.EHRforEquipes.mainModule.patientplugin.VisitEditView
 import io.kotest.core.spec.style.FunSpec
 import java.time.LocalDate
 
@@ -31,7 +32,7 @@ class VisitEditViewTest : FunSpec({
 
         val p = Patient(
             name = "Veroni Matteo",
-            gender = MALE,
+            gender = Patient.Companion.Gender.MALE,
             dateOfBirth = LocalDate.parse("2002-11-23"),
             placeOfBirth = "Modena",
             residence = "Carpi",
