@@ -5,6 +5,7 @@
 /commonModule/db.mv.db
 /commonModule/dbSQL.mv.db
 /commonModuleBenchmark/build
+/commonModuleBenchmark/.idea
 /commonModuleBenchmark/.gradle
 /commonModuleBenchmark/.kotlin/
 /commonModuleBenchmark/.run/
@@ -16,4 +17,5 @@
 /mainModule/.run/
 /mainModule/db.mv.db
 db.mv.db
+dbSQL.mv.db
 /.idea/

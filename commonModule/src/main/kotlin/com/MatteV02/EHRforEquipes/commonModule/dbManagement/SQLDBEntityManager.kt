@@ -38,12 +38,22 @@ object SQLDBEntityManager : DBEntityManager {
 
             return hikariConfig
         }
+
+        fun temporaryFileConfiguration() : HikariConfig {
+            val hikariConfig = HikariConfig()
+            hikariConfig.driverClassName = "org.h2.Driver"
+            hikariConfig.jdbcUrl = "jdbc:h2:" + System.getProperty("java.io.tmpdir") + "/db" + Random.nextInt(0..Int.MAX_VALUE)
+            hikariConfig.maximumPoolSize = 20
+
+            return hikariConfig
+        }
     }
 
     override fun dbConnection(connectionType: ConnectionTypes) {
         val configuration = when (connectionType) {
             ConnectionTypes.PERMANENT -> Defaults.permanentConfiguration()
             ConnectionTypes.VOLATILE -> Defaults.volatileConfiguration()
+            ConnectionTypes.TEMPORARY_FILE -> Defaults.temporaryFileConfiguration()
         }
 
         dataSource = HikariDataSource(configuration)

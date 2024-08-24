@@ -24,6 +24,7 @@ interface DBEntityManager {
 
     enum class ConnectionTypes {
         PERMANENT,
+        TEMPORARY_FILE,
         VOLATILE
     }
 }

@@ -11,6 +11,8 @@ import org.hibernate.cfg.AvailableSettings
 import org.hibernate.cfg.Configuration
 import org.hibernate.cfg.JdbcSettings.*
 import org.hibernate.tool.schema.Action
+import kotlin.random.Random
+import kotlin.random.nextInt
 
 @CheckHQL
 @NamedQuery(
@@ -58,12 +60,25 @@ object HibernateDBEntityManager : DBEntityManager {
             .setProperty(HIGHLIGHT_SQL, true)
             .setProperty(AvailableSettings.JAKARTA_JDBC_URL, "jdbc:h2:mem:")
 
+        val temporaryFileConfiguration: Configuration = Configuration()
+            .addAnnotatedClass(Patient::class.java)
+            .addAnnotatedClass(Place::class.java)
+            .addAnnotatedClass(Visit::class.java)
+            .addAnnotatedClass(HibernateDBEntityManager::class.java)
+            .setProperty(AvailableSettings.JAKARTA_JDBC_USER, "sa")
+            .setProperty(AvailableSettings.JAKARTA_JDBC_PASSWORD, "")
+            .setProperty(AvailableSettings.JAKARTA_HBM2DDL_CREATE_SCHEMAS, true)
+            .setProperty(AvailableSettings.JAKARTA_HBM2DDL_DATABASE_ACTION, Action.UPDATE)
+            .setProperty(CONNECTION_PROVIDER, "org.hibernate.hikaricp.internal.HikariCPConnectionProvider")
+            .setProperty("hibernate.hikari.maximumPoolSize", 20)
+            .setProperty(AvailableSettings.JAKARTA_JDBC_URL, "jdbc:h2:" + System.getProperty("java.io.tmpdir") + "/db" + Random.nextInt(0..Int.MAX_VALUE))
     }
 
     override fun dbConnection(connectionType: ConnectionTypes) {
         val configuration = when (connectionType) {
             ConnectionTypes.PERMANENT -> Defaults.permanentConfiguration
             ConnectionTypes.VOLATILE -> Defaults.volatileConfiguration
+            ConnectionTypes.TEMPORARY_FILE -> Defaults.temporaryFileConfiguration
         }
 
         sessionFactory = configuration.buildSessionFactory()
