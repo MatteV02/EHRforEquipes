@@ -14,6 +14,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import com.MatteV02.EHRforEquipes.commonModule.dbManagement.DBEntityManager
 import com.MatteV02.EHRforEquipes.commonModule.entities.patient.Patient
@@ -77,6 +78,7 @@ object PatientPlugin: Plugin {
                         onClick = {
                             onEditView = true
                         },
+                        modifier = Modifier.padding(end = 10.dp)
                     ) {
                         Icon(Icons.Default.Edit, null)
                         Text(bundle.getString("editFAB"))
@@ -84,7 +86,8 @@ object PatientPlugin: Plugin {
                     ExtendedFloatingActionButton(
                         onClick = {
                             onShowVisitsView = true
-                        }
+                        },
+                        modifier = Modifier.padding(end = 10.dp)
                     ) {
                         Icon(Icons.AutoMirrored.Filled.ViewList, null)
                         Text(bundle.getString("visitsFAB"))

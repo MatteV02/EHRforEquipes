@@ -1,4 +1,4 @@
-package com.MatteV02.EHRforEquipes.commonModuleBenchmark.benchmark.benchmarkExecutionTimeViewer
+package com.MatteV02.EHRforEquipes.commonModuleBenchmark.benchmarkExecutionTimeViewer
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier

@@ -13,17 +13,17 @@ import com.MatteV02.EHRforEquipes.mainModule.patientplugin.PatientPlugin
 
 @Composable
 fun App(plugins : List<Plugin>) {
-    var plugin by remember { mutableStateOf(plugins[0]) }
+    var selectedPlugin by remember { mutableStateOf(plugins[0]) }
 
     MaterialTheme {
         Column {
-            plugin.view(modifier = Modifier.weight(1.0f))
+            selectedPlugin.view(modifier = Modifier.weight(1.0f))
             NavigationBar {
                 plugins.forEach { p->
                     p.menuEntry(
-                        selected = false,
+                        selected = p == selectedPlugin,
                         onClick = {
-                            plugin = p
+                            selectedPlugin = p
                         },
                         modifier = Modifier
                     )

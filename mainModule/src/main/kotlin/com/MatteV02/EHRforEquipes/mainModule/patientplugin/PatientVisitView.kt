@@ -52,7 +52,7 @@ fun PatientVisitView(patient: Patient, visits: List<Visit>, modifier: Modifier) 
     } else {
         selectedVisit?.let { v ->
             Column {
-                VisitEditView(v)
+                VisitEditView(v, modifier = Modifier.padding(10.dp))
                 FloatingActionButton(
                     onClick = {
                         selectedVisit = null

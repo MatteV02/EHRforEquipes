@@ -12,6 +12,8 @@
 /commonModuleBenchmark/db.mv.db
 /commonModuleBenchmark/dbSQL.mv.db
 /mainModule/build/
+/mainModule/plugin/
+/mainModule/.idea/
 /mainModule/.gradle/
 /mainModule/.kotlin/
 /mainModule/.run/

@@ -14,12 +14,14 @@ import androidx.compose.ui.window.application
 import com.MatteV02.EHRforEquipes.commonModule.dbManagement.DBEntityManager
 import com.MatteV02.EHRforEquipes.commonModule.dbManagement.HibernateDBEntityManager
 import com.MatteV02.EHRforEquipes.commonModule.dbManagement.SQLDBEntityManager
-import com.MatteV02.EHRforEquipes.commonModuleBenchmark.benchmark.benchmarkExecutionTimeViewer.BenchmarkExecutionTimeViewerImpl
+import com.MatteV02.EHRforEquipes.commonModuleBenchmark.benchmarkExecutionTimeViewer.BenchmarkExecutionTimeViewerImpl
 import com.MatteV02.EHRforEquipes.commonModuleBenchmark.benchmark.insertPatientBenchmark.InsertPatientBenchmark
 import com.MatteV02.EHRforEquipes.commonModuleBenchmark.benchmark.insertPlaceBenchmark.InsertPlaceBenchmark
 import com.MatteV02.EHRforEquipes.commonModuleBenchmark.benchmark.insertVisitBenchmark.InsertVisitBenchmark
 import com.MatteV02.EHRforEquipes.commonModuleBenchmark.benchmark.removePatientBenchmark.RemovePatientBenchmark
 import com.MatteV02.EHRforEquipes.commonModuleBenchmark.benchmark.updatePatientBenchmark.UpdatePatientBenchmark
+import com.MatteV02.EHRforEquipes.commonModuleBenchmark.benchmarkExecutionTimeViewer.cumulative
+import com.MatteV02.EHRforEquipes.commonModuleBenchmark.benchmarkExecutionTimeViewer.movingAverage
 
 enum class Views(
     val label: String,
@@ -47,11 +49,11 @@ enum class Views(
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 fun mainWindow() = application {
 
     var viewing by remember { mutableStateOf(Views.INSERT_PATIENT) }
-    var numberOfElements by remember { mutableIntStateOf(1_000) }
+    var numberOfElements by remember { mutableIntStateOf(10_000) }
+    var cumulativeView by remember { mutableStateOf(false) }
 
     Window(onCloseRequest = ::exitApplication, title = "Benchmark", icon = painterResource("icons/app_icon_24px.xml")) {
         Column(Modifier.fillMaxSize()) {
@@ -65,8 +67,14 @@ fun mainWindow() = application {
                     val sqlResult = InsertPatientBenchmark.run(SQLDBEntityManager, 1..numberOfElements)
 
                     val viewer = BenchmarkExecutionTimeViewerImpl(viewing.label)
-                    viewer.addGraph(hibernateResults, "Hibernate", SolidColor(Color.Red))
-                    viewer.addGraph(sqlResult, "JDBC", SolidColor(Color.Blue))
+
+                    if (!cumulativeView) {
+                        viewer.addGraph(hibernateResults.movingAverage(), "Hibernate", SolidColor(Color.Red))
+                        viewer.addGraph(sqlResult.movingAverage(), "JDBC", SolidColor(Color.Blue))
+                    } else {
+                        viewer.addGraph(hibernateResults.cumulative(), "Hibernate - cumulative", SolidColor(Color.Red))
+                        viewer.addGraph(sqlResult.cumulative(), "JDBC - cumulative", SolidColor(Color.Blue))
+                    }
 
                     viewer.view(Modifier.weight(1.0f))
                 }
@@ -78,8 +86,14 @@ fun mainWindow() = application {
                     val sqlResult = InsertPlaceBenchmark.run(SQLDBEntityManager, 1..numberOfElements)
 
                     val viewer = BenchmarkExecutionTimeViewerImpl(viewing.label)
-                    viewer.addGraph(hibernateResults, "Hibernate", SolidColor(Color.Red))
-                    viewer.addGraph(sqlResult, "JDBC", SolidColor(Color.Blue))
+
+                    if (!cumulativeView) {
+                        viewer.addGraph(hibernateResults.movingAverage(), "Hibernate", SolidColor(Color.Red))
+                        viewer.addGraph(sqlResult.movingAverage(), "JDBC", SolidColor(Color.Blue))
+                    } else {
+                        viewer.addGraph(hibernateResults.cumulative(), "Hibernate - cumulative", SolidColor(Color.Red))
+                        viewer.addGraph(sqlResult.cumulative(), "JDBC - cumulative", SolidColor(Color.Blue))
+                    }
 
                     viewer.view(Modifier.weight(1.0f))
                 }
@@ -89,10 +103,15 @@ fun mainWindow() = application {
 
                     val hibernateResults = InsertVisitBenchmark.run(HibernateDBEntityManager, 1..numberOfElements)
                     val sqlResult = InsertVisitBenchmark.run(SQLDBEntityManager, 1..numberOfElements)
-
                     val viewer = BenchmarkExecutionTimeViewerImpl(viewing.label)
-                    viewer.addGraph(hibernateResults, "Hibernate", SolidColor(Color.Red))
-                    viewer.addGraph(sqlResult, "JDBC", SolidColor(Color.Blue))
+
+                    if (!cumulativeView) {
+                        viewer.addGraph(hibernateResults.movingAverage(), "Hibernate", SolidColor(Color.Red))
+                        viewer.addGraph(sqlResult.movingAverage(), "JDBC", SolidColor(Color.Blue))
+                    } else {
+                        viewer.addGraph(hibernateResults.cumulative(), "Hibernate - cumulative", SolidColor(Color.Red))
+                        viewer.addGraph(sqlResult.cumulative(), "JDBC - cumulative", SolidColor(Color.Blue))
+                    }
 
                     viewer.view(Modifier.weight(1.0f))
                 }
@@ -104,8 +123,13 @@ fun mainWindow() = application {
                     val sqlResult = UpdatePatientBenchmark.run(SQLDBEntityManager, 1..numberOfElements)
 
                     val viewer = BenchmarkExecutionTimeViewerImpl(viewing.label)
-                    viewer.addGraph(hibernateResults, "Hibernate", SolidColor(Color.Red))
-                    viewer.addGraph(sqlResult, "JDBC", SolidColor(Color.Blue))
+                    if (!cumulativeView) {
+                        viewer.addGraph(hibernateResults.movingAverage(), "Hibernate", SolidColor(Color.Red))
+                        viewer.addGraph(sqlResult.movingAverage(), "JDBC", SolidColor(Color.Blue))
+                    } else {
+                        viewer.addGraph(hibernateResults.cumulative(), "Hibernate - cumulative", SolidColor(Color.Red))
+                        viewer.addGraph(sqlResult.cumulative(), "JDBC - cumulative", SolidColor(Color.Blue))
+                    }
 
                     viewer.view(Modifier.weight(1.0f))
                 }
@@ -117,8 +141,13 @@ fun mainWindow() = application {
                     val sqlResult = RemovePatientBenchmark.run(SQLDBEntityManager, 1..numberOfElements)
 
                     val viewer = BenchmarkExecutionTimeViewerImpl(viewing.label)
-                    viewer.addGraph(hibernateResults, "Hibernate", SolidColor(Color.Red))
-                    viewer.addGraph(sqlResult, "JDBC", SolidColor(Color.Blue))
+                    if (!cumulativeView) {
+                        viewer.addGraph(hibernateResults.movingAverage(), "Hibernate", SolidColor(Color.Red))
+                        viewer.addGraph(sqlResult.movingAverage(), "JDBC", SolidColor(Color.Blue))
+                    } else {
+                        viewer.addGraph(hibernateResults.cumulative(), "Hibernate - cumulative", SolidColor(Color.Red))
+                        viewer.addGraph(sqlResult.cumulative(), "JDBC - cumulative", SolidColor(Color.Blue))
+                    }
 
                     viewer.view(Modifier.weight(1.0f))
                 }
@@ -135,8 +164,31 @@ fun mainWindow() = application {
                     numberOfElements,
                     onValueChange = { newNumberOfElements ->
                         numberOfElements = newNumberOfElements
-                    }
+                    },
+                    modifier = Modifier.padding(end = 20.dp)
                 )
+                Text("View:", Modifier.align(Alignment.CenterVertically))
+                Row(modifier = Modifier
+                    .padding(end = 5.dp)
+                    .align(Alignment.CenterVertically)
+                ) {
+                    RadioButton(
+                        selected = !cumulativeView,
+                        onClick = {
+                            cumulativeView = false
+                        }
+                    )
+                    Text("Default", Modifier.align(Alignment.CenterVertically))
+                }
+                Row(modifier = Modifier.align(Alignment.CenterVertically)) {
+                    RadioButton(
+                        selected = cumulativeView,
+                        onClick = {
+                            cumulativeView = true
+                        }
+                    )
+                    Text("Cumulative", Modifier.align(Alignment.CenterVertically))
+                }
             }
 
             NavigationBar {

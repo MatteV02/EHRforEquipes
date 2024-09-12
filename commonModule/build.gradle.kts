@@ -3,7 +3,7 @@ plugins {
     id("org.jetbrains.compose")
     id("org.jetbrains.kotlin.plugin.compose")
     kotlin("kapt")
-    id ("com.gradleup.shadow") version ("8.3.0")
+    id("org.jetbrains.dokka") version "1.9.20"
 }
 
 group = "com.MatteV02"

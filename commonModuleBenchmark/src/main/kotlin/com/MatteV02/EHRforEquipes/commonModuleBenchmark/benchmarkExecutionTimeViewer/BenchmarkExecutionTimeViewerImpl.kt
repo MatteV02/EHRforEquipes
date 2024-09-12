@@ -1,4 +1,4 @@
-package com.MatteV02.EHRforEquipes.commonModuleBenchmark.benchmark.benchmarkExecutionTimeViewer
+package com.MatteV02.EHRforEquipes.commonModuleBenchmark.benchmarkExecutionTimeViewer
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
@@ -103,7 +103,7 @@ class BenchmarkExecutionTimeViewerImpl(
                                     it.duration.toInt(computeUnit()).toFloat()
                                 )
                             },
-                            lineStyle = LineStyle(plot.color),
+                            lineStyle = LineStyle(plot.color, strokeWidth = 2.dp),
                         )
                     }
                 }
