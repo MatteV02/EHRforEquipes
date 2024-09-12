@@ -1,5 +1,8 @@
 ![banner](images/banner.png)
 
+> [!WARNING]
+> The project is still in development, each change will be posted on this page
+
 # EHRforEquipes
 This project is intended for equips of freelance doctors who work in several structures and want to streamline their workflow.
 
