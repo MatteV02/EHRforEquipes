@@ -3,7 +3,7 @@
 > [!WARNING]
 > The project is still in development, each change will be posted on this page
 
-# EHRforEquipes
+# EHRforEquips
 This project is intended for equips of freelance doctors who work in several structures and want to streamline their workflow.
 
 The project is highly customizable accordingly to the necessities of the freelance: it follows a plugin architecture so the doctor can add their preferred plugin to system and put together complex actions.
