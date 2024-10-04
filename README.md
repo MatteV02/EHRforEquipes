@@ -21,7 +21,7 @@ Here are some views of the application:
 
 ## How to use
 1. Download the app
-2. Copy in the plugin folder the desired plugin [from this selection]()
+2. Copy in the plugin folder the desired plugin [from this selection](plugins.md)
 3. Start the app
 
 ## How to write a plugin
