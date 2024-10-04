@@ -9,7 +9,6 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import com.MatteV02.EHRforEquipes.commonModule.dbManagement.HibernateDBEntityManager
 import com.MatteV02.EHRforEquipes.commonModule.plugin.Plugin
-import com.MatteV02.EHRforEquipes.mainModule.patientplugin.PatientPlugin
 
 @Composable
 fun App(plugins : List<Plugin>) {
@@ -48,5 +47,6 @@ fun main() = application {
 }
 
 fun loadPlugins() : List<Plugin> {
-    return listOf( PatientPlugin )
+    val pluginLoader = PluginLoader()
+    return pluginLoader.load()
 }

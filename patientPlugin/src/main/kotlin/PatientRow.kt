@@ -1,5 +1,3 @@
-package com.MatteV02.EHRforEquipes.mainModule.patientplugin
-
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,8 +10,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.EHRforEquipes.patientPlugin.PluginImpl.Companion.dbEntityManager
 import com.MatteV02.EHRforEquipes.commonModule.entities.patient.Patient
-import com.MatteV02.EHRforEquipes.mainModule.patientplugin.PatientPlugin.dbEntityManager
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId

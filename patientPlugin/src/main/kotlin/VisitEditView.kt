@@ -1,5 +1,3 @@
-package com.MatteV02.EHRforEquipes.mainModule.patientplugin
-
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -13,11 +11,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
+import com.EHRforEquipes.patientPlugin.PluginImpl.Companion.dbEntityManager
 import com.MatteV02.EHRforEquipes.commonModule.dbManagement.DBEntityManager
 import com.MatteV02.EHRforEquipes.commonModule.entities.patient.Patient
 import com.MatteV02.EHRforEquipes.commonModule.entities.visit.Exam
 import com.MatteV02.EHRforEquipes.commonModule.entities.visit.Visit
-import com.MatteV02.EHRforEquipes.mainModule.patientplugin.PatientPlugin.dbEntityManager
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId

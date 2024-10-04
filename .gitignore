@@ -18,6 +18,10 @@
 /mainModule/.kotlin/
 /mainModule/.run/
 /mainModule/db.mv.db
+/patientPlugin/build/
+/patientPlugin/.gradle/
+/patientPlugin/.run/
+/patientPlugin/gradle/
 db.mv.db
 dbSQL.mv.db
 /.idea/

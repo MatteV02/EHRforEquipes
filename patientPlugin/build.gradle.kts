@@ -6,17 +6,13 @@ plugins {
     id("org.jetbrains.kotlin.plugin.compose")
 }
 
-group = "com.MatteV02"
+group = "com"
 version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
     maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     google()
-}
-
-tasks.withType<Test>().configureEach {
-    useJUnitPlatform()
 }
 
 dependencies {
@@ -36,11 +32,11 @@ dependencies {
 
 compose.desktop {
     application {
-        mainClass = "com.MatteV02.EHRforEquipes.mainModule.AppKt"
+        mainClass = "MainKt"
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "mainModule"
+            packageName = "patientPlugin"
             packageVersion = "1.0.0"
         }
     }

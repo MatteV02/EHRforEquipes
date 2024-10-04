@@ -1,6 +1,8 @@
-package com.MatteV02.EHRforEquipes.mainModule.patientplugin
+package com.EHRforEquipes.patientPlugin
 
-
+import PatientEditView
+import PatientRow
+import PatientVisitView
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -23,8 +25,14 @@ import java.util.ResourceBundle
 
 private val bundle = ResourceBundle.getBundle("PatientPlugin")
 
-object PatientPlugin: Plugin {
-    internal lateinit var dbEntityManager: DBEntityManager
+class PluginImpl: Plugin {
+    companion object {
+        fun view(modifier: Modifier) {
+
+        }
+
+        internal lateinit var dbEntityManager: DBEntityManager
+    }
 
     @Composable
     override fun menuEntry(selected: Boolean, onClick: () -> Unit, modifier: Modifier) {
@@ -137,6 +145,6 @@ object PatientPlugin: Plugin {
     }
 
     override fun start(dbEntityManager: DBEntityManager) {
-        PatientPlugin.dbEntityManager = dbEntityManager
+        PluginImpl.dbEntityManager = dbEntityManager
     }
 }
