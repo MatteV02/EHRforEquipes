@@ -13,7 +13,7 @@ This project is multiplatform, portable and works in every graphical desktop env
 - Windows (x64)
 - MacOS (x64 and Silicon)
 
-You can get the latest release from [this page]().
+You can get the latest release from [this page](https://github.com/MatteV02/EHRforEquips/releases).
 
 Here are some views of the application:
 - Patient view ![patient_view](images/patient_view.png)
